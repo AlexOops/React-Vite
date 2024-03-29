@@ -1,20 +1,13 @@
 import React from 'react';
-import {Ingredients} from "../ingredients/components.jsx";
+import {Dish} from "../dish/component.jsx";
 
 export const Menu = ({menu}) => {
 
     return (
-            <ul>
-                {
-                    menu.map((item) =>
-                        <li>
-                            <p>{item.name}</p>
-                            <p>{item.price}</p>
-
-                            <Ingredients ingredients={item.ingredients}/>
-                        </li>
-                    )
-                }
-            </ul>
+        <div>
+            {
+                menu.map((dish) => <Dish dish={dish}/>)
+            }
+        </div>
     );
 };
