@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Ingredients} from "../ingredients/components.jsx";
+import {useCounter} from "../../hooks/use-counter.js";
 
 export const Dish = ({dish}) => {
+
+    if (!dish) {
+        return null;
+    }
+
     const {name, price, ingredients} = dish;
-    const [total, setTotal] = useState(0);
 
-    const decrementTotalCount = () => {
-        setTotal(prevState => prevState > 0 ? prevState - 1 : prevState);
-    }
-
-    const incrementTotalCount = () => {
-        setTotal(prevState => prevState < 5 ? prevState + 1 : prevState);
-    }
+    const {amount, increment, decrement} = useCounter();
 
     return (
         <div>
@@ -29,9 +28,9 @@ export const Dish = ({dish}) => {
             </ul>
 
             <div>
-                <button onClick={decrementTotalCount}>-</button>
-                {total}
-                <button onClick={incrementTotalCount}>+</button>
+                <button onClick={decrement} disabled={amount === 0}>-</button>
+                {amount}
+                <button onClick={increment} disabled={amount === 5}>+</button>
             </div>
 
             <hr/>

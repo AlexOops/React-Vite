@@ -6,7 +6,7 @@ export const Menu = ({menu}) => {
     return (
         <div>
             {
-                menu.map((dish) => <Dish dish={dish}/>)
+                menu?.map((dish) => <Dish dish={dish}/>)
             }
         </div>
     );

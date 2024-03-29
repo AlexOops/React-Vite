@@ -2,7 +2,7 @@ import React from 'react';
 import {Tab} from "../tab/component.jsx";
 
 export const RestaurantTabs = ({restaurants, onTabClick, currentIndex}) => {
-
+    console.log(currentIndex)
     return (
         <div>
             {
