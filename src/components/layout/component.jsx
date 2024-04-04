@@ -1,15 +1,12 @@
 import React from 'react';
+import {Header} from "../header/component.jsx";
 
 export const Layout = ({children}) => {
     return (
         <div>
-            <header>тут будет header</header>
-
-            <hr/>
+            <Header/>
 
             {children}
-
-            <hr/>
 
             <footer>тут будет footer</footer>
         </div>
