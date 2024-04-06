@@ -37,6 +37,7 @@ export const Header = () => {
 
                             {
                                 user ? (
+                                    // вынести в компоненту
                                     <div className={s.auth}>
 
                                         <p className={s.user}>{user}</p>
