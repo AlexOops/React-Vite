@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import {RestaurantTabs} from "../restaurant-tabs/component.jsx";
-import {restaurants} from "../../../../materials/mock.js";
-import {getStorageItem, setStorageItem} from "../../../../utils/storage.js";
+import {getStorageItem} from "../../../../utils/storage.js";
 
 import s from './style.module.scss';
 import {Menu} from "../../menu/component.jsx";
 
-const ACTIVE_RESTAURANT_INDEX_STORAGE_KEY = 'currentRestaurantIndex';
+const ACTIVE_RESTAURANT_ID_STORAGE_KEY = 'currentRestaurantId';
 
 export const Restaurants = () => {
-    const [currentRestaurantIndex, setCurrentRestaurantIndex] = useState(() => getStorageItem(ACTIVE_RESTAURANT_INDEX_STORAGE_KEY));
-    const currentRestaurant = restaurants[currentRestaurantIndex];
+
+    const [currentRestaurantId, setCurrentRestaurantId] = useState(() => getStorageItem(ACTIVE_RESTAURANT_ID_STORAGE_KEY));
 
     return (
         <div>
@@ -29,15 +28,11 @@ export const Restaurants = () => {
 
                     <RestaurantTabs
                         className={s.action}
-                        restaurants={restaurants}
-                        onTabClick={(index) => {
-                            setCurrentRestaurantIndex(index);
-                            setStorageItem(ACTIVE_RESTAURANT_INDEX_STORAGE_KEY, index)
-                        }}
-                        currentIndex={currentRestaurantIndex}
+                        onTabClick={setCurrentRestaurantId}
+                        currentRestaurantId={currentRestaurantId}
                     />
 
-                    <Menu menu={currentRestaurant.menu}/>
+                    <Menu restaurantId={currentRestaurantId}/>
                 </div>
             </div>
         </div>
