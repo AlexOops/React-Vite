@@ -4,12 +4,13 @@ import {useSelector} from "react-redux";
 
 import s from './style.module.scss';
 import {setStorageItem} from "../../../../utils/storage.js";
+import {selectRestaurantIds} from "../../../redux/slices/entities/restaurant/selectors.js";
 
 const ACTIVE_RESTAURANT_ID_STORAGE_KEY = 'currentRestaurantIndex';
 
 export const RestaurantTabs = ({onTabClick, className, currentRestaurantId}) => {
 
-    const restaurantIds = useSelector((state) => state.restaurant.ids);
+    const restaurantIds = useSelector((state) => selectRestaurantIds(state));
 
     return (
         <div className={className}>
