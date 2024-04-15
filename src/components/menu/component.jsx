@@ -13,7 +13,7 @@ export const Menu = ({restaurantId}) => {
 
         dispatch(getMenuByRestaurantId(restaurantId))
 
-    }, [restaurantId]); // сработает, когда поменяется id ресторана
+    }, [restaurantId]);
 
     const menu = useSelector((state) => selectMenuByRestaurantId(state, restaurantId));
 
