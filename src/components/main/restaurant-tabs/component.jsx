@@ -1,16 +1,8 @@
 import React from 'react';
-import {Tab} from "../../tab/component.jsx";
-import {useSelector} from "react-redux";
-
 import s from './style.module.scss';
-import {setStorageItem} from "../../../../utils/storage.js";
-import {selectRestaurantIds} from "../../../redux/slices/entities/restaurant/selectors.js";
+import {RestaurantTabContainer} from "../../restaurant-tab/container.jsx";
 
-const ACTIVE_RESTAURANT_ID_STORAGE_KEY = 'currentRestaurantIndex';
-
-export const RestaurantTabs = ({onTabClick, className, currentRestaurantId}) => {
-
-    const restaurantIds = useSelector((state) => selectRestaurantIds(state));
+export const RestaurantTabs = ({onTabClick, restaurantIds, activeRestaurantId, className}) => {
 
     return (
         <div className={className}>
@@ -20,14 +12,11 @@ export const RestaurantTabs = ({onTabClick, className, currentRestaurantId}) => 
                 <div className={s.restaurantTabs}>
                     {
                         restaurantIds.map((restaurantId) =>
-                            <Tab
+                            <RestaurantTabContainer
                                 key={restaurantId}
+                                onClick={() => onTabClick(restaurantId)}
                                 restaurantId={restaurantId}
-                                onClick={() => {
-                                    onTabClick(restaurantId);
-                                    setStorageItem(ACTIVE_RESTAURANT_ID_STORAGE_KEY, restaurantId);
-                                }}
-                                isActive={restaurantId === currentRestaurantId}
+                                isActive={restaurantId === activeRestaurantId}
                             />
                         )
                     }

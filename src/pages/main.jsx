@@ -1,12 +1,12 @@
 import React from 'react';
-import {Restaurants} from "../components/main/restaurants/component.jsx";
 import {Hero} from "../components/main/hero/component.jsx";
+import {RestaurantsContainer} from "../components/main/restaurants/container.jsx";
 
 export const Main = () => {
     return (
         <div>
             <Hero/>
-            <Restaurants/>
+            <RestaurantsContainer/>
         </div>
     );
 };

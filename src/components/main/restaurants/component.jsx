@@ -1,24 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {RestaurantTabs} from "../restaurant-tabs/component.jsx";
-import {getStorageItem} from "../../../../utils/storage.js";
-
+import React, {useState} from 'react';
 import s from './style.module.scss';
-import {Menu} from "../../menu/component.jsx";
-import {getRestaurants} from "../../../redux/slices/entities/restaurant/thunks/get-restaurants.js";
-import {useDispatch} from "react-redux";
-
-const ACTIVE_RESTAURANT_ID_STORAGE_KEY = 'currentRestaurantId';
+import {MenuContainer} from "../../menu/container.jsx";
+import {RestaurantTabsContainer} from "../restaurant-tabs/container.jsx";
 
 export const Restaurants = () => {
 
-    const [currentRestaurantId, setCurrentRestaurantId] = useState(() => getStorageItem(ACTIVE_RESTAURANT_ID_STORAGE_KEY));
-
-    const dispatch = useDispatch();
-
-    // на mount
-    useEffect(() => {
-        dispatch(getRestaurants())
-    }, []);
+    const [activeRestaurantId, setActiveRestaurantId] = useState(null);
 
     return (
         <div>
@@ -35,13 +22,20 @@ export const Restaurants = () => {
                         </p>
                     </div>
 
-                    <RestaurantTabs
+                    <RestaurantTabsContainer
                         className={s.action}
-                        onTabClick={setCurrentRestaurantId}
-                        currentRestaurantId={currentRestaurantId}
+                        onTabClick={setActiveRestaurantId}
+                        activeRestaurantId={activeRestaurantId}
                     />
 
-                    <Menu restaurantId={currentRestaurantId}/>
+                    {
+                        activeRestaurantId ? (
+                            <MenuContainer restaurantId={activeRestaurantId}/>
+                        ) : (
+                            <div className={s.noRestaurant}>Выберите расторан!</div>
+                        )
+
+                    }
                 </div>
             </div>
         </div>
