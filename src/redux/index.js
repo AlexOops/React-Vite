@@ -12,6 +12,5 @@ export const store = configureStore({
         reviewSlice,
         userSlice,
         cartSlice,
-    ),
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+    )
 });
