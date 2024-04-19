@@ -1,15 +1,24 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {RestaurantTabs} from "../restaurant-tabs/component.jsx";
 import {getStorageItem} from "../../../../utils/storage.js";
 
 import s from './style.module.scss';
 import {Menu} from "../../menu/component.jsx";
+import {getRestaurants} from "../../../redux/slices/entities/restaurant/thunks/get-restaurants.js";
+import {useDispatch} from "react-redux";
 
 const ACTIVE_RESTAURANT_ID_STORAGE_KEY = 'currentRestaurantId';
 
 export const Restaurants = () => {
 
     const [currentRestaurantId, setCurrentRestaurantId] = useState(() => getStorageItem(ACTIVE_RESTAURANT_ID_STORAGE_KEY));
+
+    const dispatch = useDispatch();
+
+    // на mount
+    useEffect(() => {
+        dispatch(getRestaurants())
+    }, []);
 
     return (
         <div>

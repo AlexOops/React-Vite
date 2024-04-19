@@ -1,21 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Dish} from "../dish/component.jsx";
 import s from './style.module.scss';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getMenuByRestaurantId} from "../../redux/slices/entities/dishe/thunks/get-menu-by-restaurant-id.js";
+import {selectMenuByRestaurantId} from "../../redux/slices/entities/restaurant/selectors.js";
 
 export const Menu = ({restaurantId}) => {
 
-    const restaurant = useSelector((state) => state.restaurant.entities[restaurantId]);
+    const dispatch = useDispatch();
 
-    if (!restaurant) {
+    useEffect(() => {
+
+        dispatch(getMenuByRestaurantId(restaurantId))
+
+    }, [restaurantId]); // сработает, когда поменяется id ресторана
+
+    const menu = useSelector((state) => selectMenuByRestaurantId(state, restaurantId));
+
+    if (!menu?.length) {
         return null;
     }
 
-    // index временно
     return (
         <div className={s.menu}>
             {
-                restaurant.menu.map((dish, index) => <Dish key={index} dishId={dish}/>)
+                menu.map((dishId) => <Dish key={dishId} dishId={dishId}/>)
             }
         </div>
     );

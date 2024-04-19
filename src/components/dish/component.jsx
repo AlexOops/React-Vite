@@ -1,25 +1,32 @@
 import React, {useContext} from 'react';
-import {useCounter} from "../../hooks/use-counter.js";
 import dishImage from '../../assets/dish.png';
 
 import s from './style.module.scss';
 import {Button} from "../button/component.jsx";
 import {UserAuthContext} from "../../contexts/userAuth.jsx";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Ingredients} from "../ingredients/components.jsx";
+import {selectDishById} from "../../redux/slices/entities/dishe/selectors.js";
+import {selectDishAmount} from "../../redux/slices/ui/cart/selectors.js";
+import {decrementDish, incrementDish} from "../../redux/slices/ui/cart/index.js";
 
 export const Dish = ({dishId}) => {
 
     const {user} = useContext(UserAuthContext);
 
-    const dish = useSelector((state) => state.dish.entities[dishId]);
+    const dish = useSelector((state) => selectDishById(state, dishId));
+    const amount = useSelector((state) => selectDishAmount(state, dishId));
+
+    const dispatch = useDispatch();
+    const increment = () => dispatch(incrementDish(dishId));
+    const decrement = () => dispatch(decrementDish(dishId));
 
     if (!dish) {
         return null;
     }
+
     const {name, price, ingredients} = dish;
 
-    const {amount, increment, decrement} = useCounter();
 
     return (
         <ul className={s.dish}>
