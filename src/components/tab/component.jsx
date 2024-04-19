@@ -1,17 +1,8 @@
 import React from 'react';
-
 import s from './style.module.scss';
 import classNames from "classnames";
-import {useSelector} from "react-redux";
-import {selectRestaurantById} from "../../redux/slices/entities/restaurant/selectors.js";
 
-export const Tab = ({restaurantId, onClick, isActive}) => {
-
-    const restaurant = useSelector((state) => selectRestaurantById(state, restaurantId))
-
-    if (!restaurant) {
-        return null;
-    }
+export const Tab = ({title, onClick, isActive}) => {
 
     return (
         <div
@@ -20,9 +11,9 @@ export const Tab = ({restaurantId, onClick, isActive}) => {
                     s.tab,
                     {[s.active]: isActive}
                 )}
-            onClick={() => onClick(restaurantId)}
+            onClick={() => onClick()}
         >
-            {restaurant.name}
+            {title}
 
         </div>
     );

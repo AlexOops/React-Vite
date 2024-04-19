@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from "classnames";
-
 import s from './style.module.scss';
 
 export const Button = ({children, onClick, disabled, viewVariant, size, className}) => {
