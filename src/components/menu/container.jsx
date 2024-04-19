@@ -1,20 +1,22 @@
 import React from 'react';
 import {Menu} from "./component.jsx";
-import {useSelector} from "react-redux";
-import {getMenuByRestaurantId} from "../../redux/slices/entities/dishe/thunks/get-menu-by-restaurant-id.js";
-import {selectMenuByRestaurantId} from "../../redux/slices/entities/restaurant/selectors.js";
-import {useRequest} from "../../hooks/requests/use-request.js";
-import {REQUEST_STATUSES} from "../../redux/slices/ui/request/constants.js";
-import {MenuSkeleton} from "./skeleton.jsx";
+import {useGetRestaurantMenuQuery} from "../../redux/service/api.js";
+import {useParams} from "react-router-dom";
+import {Loading} from "../loading/component.jsx";
 
-export const MenuContainer = ({restaurantId}) => {
+export const MenuContainer = () => {
 
-    const requestStatus = useRequest(getMenuByRestaurantId, restaurantId);
-    const dishIds = useSelector((state) => selectMenuByRestaurantId(state, restaurantId));
+    const {restaurantId} = useParams();
 
-    if ([REQUEST_STATUSES.pending, REQUEST_STATUSES.idle].includes(requestStatus)) {
-        return <MenuSkeleton/>
+    const {data: dishes, isLoading} = useGetRestaurantMenuQuery(restaurantId);
+
+    if (isLoading) {
+        return <Loading text={"Загрузка меню ресторана ..."}/>
     }
 
-    return <Menu dishIds={dishIds}/>
+    if (!dishes) {
+        return null;
+    }
+
+    return <Menu dishes={dishes}/>
 };

@@ -1,27 +1,28 @@
 import React from 'react';
 import dishImage from '../../assets/dish.png';
-
 import s from './style.module.scss';
 import {Ingredients} from "../ingredients/components.jsx";
 import {Counter} from "../counter/component.jsx";
+import {NavLink} from "react-router-dom";
 
 export const Dish = ({dish, withCart, amount, increment, decrement}) => {
 
     return (
-        <ul className={s.dish}>
-            <li className={s.img}>
+        <NavLink className={s.dish} to={`/dish/${dish?.id}`}>
+
+            <div className={s.img}>
                 <img src={dishImage} alt="dish"/>
-            </li>
+            </div>
 
-            <li className={s.name}>
+            <div className={s.name}>
                 <p>{dish.name}</p>
-            </li>
+            </div>
 
-            <li className={s.ingredients}>
+            <div className={s.ingredients}>
                 <Ingredients ingredients={dish.ingredients}/>
-            </li>
+            </div>
 
-            <li className={s.quantityControl}>
+            <div className={s.quantityControl}>
 
                 <div className={s.price}>
                     <p>{dish.price} $</p>
@@ -33,7 +34,7 @@ export const Dish = ({dish, withCart, amount, increment, decrement}) => {
                     </div>
                 }
 
-            </li>
-        </ul>
+            </div>
+        </NavLink>
     );
 };

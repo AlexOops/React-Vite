@@ -1,14 +1,20 @@
 import React from 'react';
 import {Header} from "../header/component.jsx";
+import {Outlet} from "react-router-dom";
+import {Footer} from "../footer/footer.jsx";
 
-export const Layout = ({children}) => {
+import s from "./style.module.scss";
+
+export const Layout = () => {
     return (
-        <div>
+        <div className={s.layout}>
             <Header/>
 
-            {children}
+            <div className={s.center}>
+                <Outlet/>
+            </div>
 
-            <footer>тут будет footer</footer>
+            <Footer/>
         </div>
     );
 };
