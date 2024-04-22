@@ -1,16 +1,28 @@
 import React from 'react';
 
 import s from './style.module.scss';
+import {NavLink} from "react-router-dom";
+import classNames from "classnames";
 
 export const Navigate = () => {
     return (
         <nav className={s.navigation}>
-            <ul className={s.navList}>
-                <li className={s.navItem}><a className={s.navLink} href="/">Главная</a></li>
-                <li className={s.navItem}><a className={s.navLink} href="#">Меню</a></li>
-                <li className={s.navItem}><a className={s.navLink} href="#">О нас</a></li>
-                <li className={s.navItem}><a className={s.navLink} href="#">Контакты</a></li>
-            </ul>
+            <div className={s.navList}>
+                <NavLink className={({isActive}) => classNames(
+                    s.navLink,
+                    {[s.active]: isActive}
+                )} to={'/'}>Главная</NavLink>
+
+                <NavLink className={({isActive}) => classNames(
+                    s.navLink,
+                    {[s.active]: isActive}
+                )} to={'/restaurants'}>Рестораны</NavLink>
+
+                <NavLink className={({isActive}) => classNames(
+                    s.navLink,
+                    {[s.active]: isActive}
+                )} to={'/about-us'}>О нас</NavLink>
+            </div>
         </nav>
     );
 };

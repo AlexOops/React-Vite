@@ -1,14 +1,17 @@
 import React from 'react';
 
-export const Review = ({review}) => {
+import s from './style.module.scss';
 
-    const {user, text, rating} = review;
+export const Review = ({review, user}) => {
+
+    const {text, rating} = review;
+    const userName = user ? user.name : "Anonymous";
 
     return (
-        <>
-            <p>{user}</p>
-            <p>{text}</p>
-            <p>{rating}</p>
-        </>
+        <div className={s.review}>
+            <p className={s.user}>{userName}</p>
+            <p className={s.text}>{text}</p>
+            <p className={s.rating}>{rating}</p>
+        </div>
     );
 };

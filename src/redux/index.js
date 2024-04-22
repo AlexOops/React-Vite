@@ -5,6 +5,7 @@ import {reviewSlice} from "./slices/entities/review/index.js";
 import {userSlice} from "./slices/entities/user/index.js";
 import {cartSlice} from "./slices/ui/cart/index.js";
 import {requestSlice} from "./slices/ui/request/index.js";
+import {apiService} from "./service/api.js";
 
 export const store = configureStore({
     reducer: combineSlices(
@@ -13,6 +14,10 @@ export const store = configureStore({
         reviewSlice,
         userSlice,
         cartSlice,
-        requestSlice
-    )
+        requestSlice,
+
+        //rtkQ
+        apiService,
+    ),
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiService.middleware)
 });
