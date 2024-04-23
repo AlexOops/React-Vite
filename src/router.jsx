@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, Navigate} from "react-router-dom";
 
 import {Layout} from "./components/layout/component.jsx";
 import {RestaurantsPage} from "./pages/restaurants.jsx";
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <MenuContainer/>
+                                element: <Navigate to={"./menu"} replace/>
                             },
                             {
                                 path: 'menu',
