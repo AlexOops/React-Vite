@@ -8,6 +8,10 @@ import s from "./style.module.scss";
 export const Layout = () => {
     return (
         <div className={s.layout}>
+
+            <div id="modal-container"/>
+            <div id="popover-container"/>
+
             <Header/>
 
             <div className={s.center}>
